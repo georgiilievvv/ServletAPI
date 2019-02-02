@@ -1,6 +1,7 @@
 package domain.models.service;
 
-public class ProductServiceModel {
+public class
+ProductServiceModel {
 
     private String id;
     private String name;
@@ -11,7 +12,7 @@ public class ProductServiceModel {
     }
 
     public String getId() {
-        return id;
+    return id;
     }
 
     public void setId(String id) {

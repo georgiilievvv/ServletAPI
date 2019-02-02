@@ -7,7 +7,8 @@ import repository.ProductRepository;
 import util.ModelMapper;
 
 import javax.inject.Inject;
-import java.net.Proxy;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductServiceImpl implements ProductService{
 
@@ -25,5 +26,20 @@ public class ProductServiceImpl implements ProductService{
         entity.setType(Type.valueOf(productServiceModel.getType()));
 
         this.productRepository.save(entity);
+    }
+
+    @Override
+    public List<ProductServiceModel> allProducts() {
+        return this.productRepository.findAll()
+                .stream()
+                .map(pr -> this.modelMapper.map(pr, ProductServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductServiceModel findByName(String name) {
+
+        return this.modelMapper.map(
+                this.productRepository.findByName(name), ProductServiceModel.class);
     }
 }
